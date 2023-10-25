@@ -1,8 +1,9 @@
-import controllers.GestionPersonnes;
 import models.Notes;
 import models.Enseignants;
 import models.Etudiants;
 import java.util.Scanner;
+
+import Views.GestionPersonnes;
 
 
 public class App {

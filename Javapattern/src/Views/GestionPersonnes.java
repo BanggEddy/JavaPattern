@@ -1,4 +1,4 @@
-package controllers;
+package Views;
 
 import java.util.Scanner;
 import models.Enseignants;
@@ -6,7 +6,19 @@ import models.Etudiants;
 
 public class GestionPersonnes {
 
-    public static void main(String[] args) {
+    private static GestionPersonnes instance = null;
+
+    private GestionPersonnes() {
+    }
+
+    public static GestionPersonnes getInstance() {
+        if (instance == null) {
+            instance = new GestionPersonnes();
+        }
+        return instance;
+    }
+
+    public void gérerPersonnes() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Est-ce que vous êtes un étudiant ou un enseignant ? (etudiant/enseignant)");
@@ -20,10 +32,7 @@ public class GestionPersonnes {
             System.out.print("Prénom : ");
             etudiant.setPrenom(scanner.next());
 
-            // Affichages
-            System.out.println("Informations de l'étudiant :");
-            System.out.println("Nom : " + etudiant.getNom() + "   Prénom : " + etudiant.getPrenom());
-            
+            System.out.println("L'étudiant :"+ etudiant.getNom() + " "+ etudiant.getPrenom()+ ", a été ajouté avec succès.");
         } else if (role.equals("enseignant")) {
             Enseignants enseignant = new Enseignants(1, "", "", "", 0, "", "");
             System.out.println("Veuillez saisir les informations de l'enseignant :");
@@ -32,14 +41,16 @@ public class GestionPersonnes {
             System.out.print("Prénom : ");
             enseignant.setPrenom(scanner.next());
 
-            // Affichages
-            System.out.println("Informations de l'enseignant :");
-            System.out.println("Nom : " + enseignant.getNom() + "  Prénom : " + enseignant.getPrenom());
+            System.out.println("L'enseignant " + enseignant.getNom()+" " + enseignant.getPrenom() + "a été ajouté avec succès" );
         } else {
             System.out.println("Rôle non reconnu.");
         }
 
-        // Fermez le scanner
         scanner.close();
+    }
+
+    public static void main(String[] args) {
+        GestionPersonnes gestionPersonnes = GestionPersonnes.getInstance();
+        gestionPersonnes.gérerPersonnes();
     }
 }
